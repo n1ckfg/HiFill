@@ -124,9 +124,9 @@ def read_imgs_masks(args):
 
 parser = argparse.ArgumentParser()
 args = parser.parse_args()
-args.images = '../samples/testset' # input image directory
-args.masks = '../samples/maskset' # input mask director
-args.output_dir = './results' # output directory
+args.images = '../input' # input image directory
+args.masks = '../mask' # input mask director
+args.output_dir = '../output' # output directory
 args.multiple = 6 # multiples of image resizing 
 
 paths_img, paths_mask = read_imgs_masks(args)
@@ -152,6 +152,6 @@ with tf.Graph().as_default():
         raw_mask = cv2.imread(path_mask)
         inpainted = inpaint(raw_img, raw_mask, sess, inpainted_512_node, attention_node, mask_512_node, image_ph, mask_ph, args.multiple)
         filename = args.output_dir + '/' + os.path.basename(path_img)
-        cv2.imwrite(filename + '_inpainted.jpg', inpainted)
+        cv2.imwrite(filename + '_inpainted.png', inpainted)
 
 
